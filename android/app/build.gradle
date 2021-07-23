@@ -32,6 +32,31 @@ android {
     }
 }
 
+tasks.register('hello'){
+    description('ma tache de demo')
+
+    doLast {
+        println('Coucou c est ma tache à moi ')
+    }
+
+}
+
+
+def number=System.getenv('BUILD_NUMBER')
+
+task buildNumber(type:Exec){
+    executable 'sh'
+    doLast {
+    }
+}
+
+task copyBuildFile(type:Copy){
+    dependsOn(buildNumber)
+    println(number)
+    println(System.getenv('BUILD_NUMBER'))
+    mkdir('buildN'+number)
+}
+
 dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.2.0'
